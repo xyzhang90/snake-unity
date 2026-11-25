@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="贪吃蛇：大一的 C 语言控制台作业 → 网页复刻 + Unity 工程">
+<title>SNAKE · 从控制台到 Unity</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="head">
+    <div class="brand">
+      <h1>SNAKE<span class="dot">.</span></h1>
+      <p class="sub">大一 C 语言控制台作业 → 网页复刻版</p>
+    </div>
+    <div class="hud" id="hud">
+      <div class="hud-item"><span class="k">分数</span><span class="v" id="hudScore">0</span></div>
+      <div class="hud-item"><span class="k">最高</span><span class="v" id="hudBest">0</span></div>
+      <div class="hud-item"><span class="k">难度</span><span class="v" id="hudDiff">普通</span></div>
+      <div class="hud-item"><span class="k">穿墙</span><span class="v" id="hudWrap">关</span></div>
+      <div class="hud-item gold" id="hudBonusBox" hidden><span class="k">金果</span><span class="v" id="hudBonus">6.0s</span></div>
+    </div>
+  </header>
+
+  <div class="stage" id="stage">
+    <canvas id="game"></canvas>
+
+    <div class="panel" id="panelMenu">
+      <div class="card">
+        <h2>SNAKE</h2>
+        <p class="tag">选难度 → 回车或点开始。规则和原版控制台一致，只是换了个壳。</p>
+        <div class="diffs" id="diffs"></div>
+        <label class="toggle">
+          <input type="checkbox" id="wrapToggle">
+          <span>穿墙模式<em>撞到边界从对面出来</em></span>
+        </label>
+        <button class="primary" id="btnStart">开始游戏</button>
+        <p class="tip">每吃 5 个果子会刷出限时 <b>金果</b>，分数 ×3，6 秒内没吃到就消失。</p>
+        <p class="best-line">历史最高 <b id="menuBest">0</b></p>
+      </div>
+    </div>
+
+    <div class="panel" id="panelPause" hidden>
+      <div class="card slim">
+        <h2 class="pause-title">暂停</h2>
+        <p class="tag">空格 / 点击屏幕继续</p>
+        <button class="primary" id="btnResume">继续</button>
+      </div>
+    </div>
+
+    <div class="panel" id="panelOver" hidden>
+      <div class="card">
+        <h2 class="over-title">GAME OVER</h2>
+        <div class="score-big" id="overScore">0</div>
+        <p class="best-line">最高分 <b id="overBest">0</b><span class="record" id="overRecord" hidden>新纪录</span></p>
+        <button class="primary" id="btnAgain">再来一局</button>
+        <button class="ghost" id="btnMenu">回菜单</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <p class="keys">方向键 / WASD 移动 · 空格暂停 · R 重开 · Esc 菜单 · 手机可滑动屏幕或点右下方向键</p>
+    <div class="foot-right">
+      <button class="ghost small" id="btnSound">音效 开</button>
+      <a class="ghost small" href="https://github.com/xyzhang90/snake-unity" target="_blank" rel="noopener">源码</a>
+    </div>
+  </footer>
+</div>
+
+<div class="dpad" id="dpad" aria-hidden="true">
+  <button data-dir="up" class="up">▲</button>
+  <button data-dir="left" class="left">◀</button>
+  <button data-dir="down" class="down">▼</button>
+  <button data-dir="right" class="right">▶</button>
+</div>
+
+<script src="engine.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
